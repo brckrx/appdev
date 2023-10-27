@@ -1,0 +1,50 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>NUEVO LIBRO</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<h3>Nuevo Libro</h3>
+		<hr>
+		<form action="#" th:action="@{/save}" th:object="${bookForm}" method="post">
+			<label for="name">Nombre Libro</label>
+			<input type="text" th:field="*{bk_name}" id="name" class="form-control mb-4 col-4">
+			<span th:if="${#fields.hasErrors('bk_name')}" th:errors="*{bk_name}"></span>
+			<label for="name">Autor</label>
+			<select th:field="*{author}" class="form-control mb-4 col-4">
+				<option value=""> - SELECCIONAR - </option>
+				<option th:each="author : ${authors}" th:value="${author.at_id}" th:utext="${author.at_name}" />
+			</select>
+			<span th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
+			<label for="name">Categoria</label>
+			<select th:field="*{category}" class="form-control mb-4 col-4">
+				<option value=""> - SELECCIONAR - </option>
+				<option th:each="category : ${categories}" th:value="${category.ct_id}"
+					th:utext="${category.ct_name}" />
+			</select>
+			<span th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></span>
+			<label for="name">Precio </label>
+			<input type="text" th:field="*{bk_price}" id="price" placeholder="0.00 USD" class="form-control mb-4 col-4">
+			<span th:if="${#fields.hasErrors('bk_price')}" th:errors="*{bk_price}"></span>
+
+			<label for="name">Estado</label>
+			<select th:field="*{bk_status}" class="form-control mb-4 col-4">
+				<option value=""> -SELECCIONAR ESTADO- </option>
+				<option value="DISPONIBLE">DISPONIBLE</option>
+				<option value="NO DISPONIBLE">NO DISPONIBLE</option>
+			</select>
+			<span th:if="${#fields.hasErrors('bk_status')}" th:errors="*{bk_status}"></span>
+
+			<input type="submit" value="Guardar" class="btn btn-primary btn-sm mb-2">
+			<a th:href="@{/books}" class="btn btn-primary btn-sm mb-2"> Cancelar</a>
+		</form>
+		<hr />
+
+	</div>
+</body>
+
+</html>
